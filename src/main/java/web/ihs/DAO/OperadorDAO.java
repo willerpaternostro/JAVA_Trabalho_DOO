@@ -1,5 +1,6 @@
 package web.ihs.DAO;
 
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,10 +15,10 @@ import web.ihs.util.ConexaoFactory;
 public class OperadorDAO {
 	public void cadastrar(Operador operador) throws SQLException {
 		try(Connection conn = ConexaoFactory.getConexao();) { //try with resources
-			String sql = "insert into operadores (nome,email,senha) values (?,?,?)";
+			String sql = "insert into operadores (email,nome,senha) values (?,?,?)";
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1,operador.getNome());
-			ps.setString(2,operador.getEmail());
+			ps.setString(1,operador.getEmail());
+			ps.setString(2,operador.getNome());
 			ps.setString(3,operador.getSenha());
 	
 			ps.executeUpdate();
@@ -28,13 +29,12 @@ public class OperadorDAO {
 	
 	public void atualizar(Operador operador) {
 		try(Connection conn = ConexaoFactory.getConexao();) { //try with resources
-			String sql = "update operadores set nome = ?, email = ?, senha = ?, permissaoAdmin = ? where email = ?";
+			String sql = "update operadores set email = ?, nome = ?,  senha = ? where email = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1,operador.getNome());
-			ps.setString(2,operador.getEmail());
+			ps.setString(1,operador.getEmail());
+			ps.setString(2,operador.getNome());
 			ps.setString(3,operador.getSenha());
-			ps.setBoolean(4,operador.getPermissaoAdmin());
-			ps.setString(5,operador.getEmail());
+			ps.setString(4,operador.getEmail());
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -70,8 +70,24 @@ public class OperadorDAO {
 			throw new RuntimeException(e);
 		}
 	}
+	public Operador getOperador(String email) {
+		try (Connection conn = ConexaoFactory.getConexao();){
+			String sql = "select * from operadores where email = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, email);
+			ResultSet rs = ps.executeQuery();
+			Operador operador = null;
+			while(rs.next()) {
+				operador = new Operador(rs.getString(1), rs.getString(2),rs.getString(3));
+			}
+			return operador;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
 	public boolean autenticar(Operador usuario) {
-		String sql = "select * from usuario where login=? and senha=?";
+		String sql = "select * from operadores where email=? and senha=?";
 		try(Connection conn = ConexaoFactory.getConexao()) {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1,usuario.getEmail());

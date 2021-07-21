@@ -1,0 +1,47 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Relatorio Clientes</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+</head>
+<body class="bg-dark text-white">
+	<div class="row">
+		<a class="col-1 btn btn-secondary" href="controle?comando=MenuRelatorios" style="max-height:40px;"> Voltar</a>
+		<div class="col-11 text-end">
+			<span class="h5">Bem-vindo, ${usuario.nome}</span>
+			<a href="controle?comando=Deslogar" class="col-1 btn btn-danger" style="max-height:40px">
+			 Sair
+			</a>
+		</div>
+	</div>
+	<div class="row justify-content-center">
+		<h1 class="col-12 text-center mb-4">Relatorio  Clientes</h1>
+	</div>
+		
+	<div class="row justify-content-center">
+		<table class="col-9">
+			<tr>
+				<th>Nome</th>
+				<th>CPF</th>
+				<th>Endereco</th>
+				<th>Telefone</th>
+				<th>Solicitacoes servico</th>
+			</tr>
+				<c:forEach items="${clientesRelatorio}" var="cliente" varStatus="id">
+					<tr>
+						<td>${cliente.getNome()}</td>
+						<td>${cliente.getCpf()}</td>
+						<td>${cliente.getEndereco()}</td>
+						<td>${cliente.getTelefone()}</td>
+						<td>${solicitacoesRelatorio.get(id.count-1)}</td>
+					</tr>
+				</c:forEach>
+		</table>
+	</div>
+</body>
+</html>

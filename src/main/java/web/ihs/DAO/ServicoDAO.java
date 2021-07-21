@@ -15,17 +15,17 @@ import web.ihs.util.ConexaoFactory;
 public class ServicoDAO {
 	public void cadastrar(Servico servico) throws SQLException {
 		try(Connection conn = ConexaoFactory.getConexao();) { //try with resources
-			String sql = "insert into servicos (id,cpfCliente,documentoPrestador,tempoGasto,valorFinal,avaliacao,dataRealizacao,status,tipoServico) values (?,?,?,?,?,?,?,?,?)";
+			String sql = "insert into servicos (cpfCliente,documentoPrestador,tempoGasto,valorFinal,porcentagemAdm,avaliacao,dataRealizacao,tipoServico,status) values (?,?,?,?,?,?,?,?,?)";
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setInt(1,servico.getId());
-			ps.setString(2,servico.getCliente().getCpf());
-			ps.setString(3,servico.getPrestador().getDocumento());
-			ps.setDouble(4,servico.getTempoGasto());
-			ps.setFloat(5,servico.getValorFinal());
+			ps.setString(1,servico.getCpfCliente());
+			ps.setString(2,servico.getDocumentoPrestador());
+			ps.setDouble(3,servico.getTempoGasto());
+			ps.setFloat(4,servico.getValorFinal());
+			ps.setDouble(5,servico.getPorcentagemAdm());
 			ps.setDouble(6,servico.getAvaliacao());
 			ps.setString(7,servico.getDataRealizacao());
-			ps.setBoolean(8,servico.getStatus());
-			ps.setString(9,servico.getTipoServico());
+			ps.setString(8,servico.getTipoServico());
+			ps.setBoolean(9,servico.getStatus());
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			throw (e);
@@ -34,18 +34,21 @@ public class ServicoDAO {
 	
 	public void atualizar(Servico servico) {
 		try(Connection conn = ConexaoFactory.getConexao();) { //try with resources
-			String sql = "update servicos set cpfCliente = ?, documentoPrestador= ?, tempoGasto= ?, valorFinal= ? , avaliacao= ?, dataRealizacao= ?  , status = ? , tipoServico= ?  where id = ?";
+			String sql = "update servicos set cpfCliente = ?, documentoPrestador= ?, tempoGasto= ?, valorFinal= ? ,porcentagemAdm =?, avaliacao= ?, dataRealizacao= ?, tipoServico= ?, status = ? where id = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
-		
-			ps.setString(1,servico.getCliente().getCpf());
-			ps.setString(2,servico.getPrestador().getDocumento());
+			System.out.println(servico.getId());
+			System.out.println(servico.getTipoServico());
+			ps.setString(1,servico.getCpfCliente());
+			ps.setString(2,servico.getDocumentoPrestador());
 			ps.setDouble(3,servico.getTempoGasto());
 			ps.setFloat(4,servico.getValorFinal());
-			ps.setDouble(5,servico.getAvaliacao());
-			ps.setString(6,servico.getDataRealizacao());
-			ps.setBoolean(7,servico.getStatus());
+			ps.setDouble(5,servico.getPorcentagemAdm());
+			ps.setDouble(6,servico.getAvaliacao());
+			ps.setString(7,servico.getDataRealizacao());
 			ps.setString(8,servico.getTipoServico());
-			ps.setInt(9,servico.getId());
+			ps.setBoolean(9,servico.getStatus());
+			ps.setInt(10,servico.getId());
+			
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -79,8 +82,8 @@ public class ServicoDAO {
 											rs.getDouble(6),
 											rs.getDouble(7),
 											rs.getString(8),
-											rs.getBoolean(9),
-											rs.getString(10)
+											rs.getString(9),
+											rs.getBoolean(10)
 											);
 				servicos.add(servico);
 			}

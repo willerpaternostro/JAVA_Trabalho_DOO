@@ -31,7 +31,7 @@ public class Main {
 	
 	public static void main(String[] args) {
 		Administrador admin = new Administrador("admin","admin@ihomeservices.br","123456");
-		admin.setPermissaoAdmin(true);
+		
 		repositorioOperadores.add(admin);
 		
 		Operador op1 = new Operador("Leonardo","leo@ihomeservices.br","1234");
@@ -49,11 +49,11 @@ public class Main {
 		repositorioPrestadorServicos.add(p1);
 		repositorioPrestadorServicos.add(p2);
 		
-		Servico s1 = new Servico (1,"123456789","98745612399",5,500,10,5,"28-06-2021",true,"Eletricista");
-		Servico s2 = new Servico (2,"123456789","98745612388",5,500,10,5,"26-06-2021",false,"Mecanico");
-		Servico s3 = new Servico (3,"123456789","98745612399",5,500,10,9,"25-06-2021",true,"Eletricista");
-		Servico s4 = new Servico (4,"123456788","98745612388",5,500,10,4,"20-06-2021",false,"Mecanico");
-		Servico s5 = new Servico (5,"123456788","98745612388",5,500,10,6,"20-06-2021",true,"Mecanico");
+		Servico s1 = new Servico (1,"123456789","98745612399",5,500,10,5,"28-06-2021","Eletricista",true);
+		Servico s2 = new Servico (2,"123456789","98745612388",5,500,10,5,"26-06-2021","Mecanico",false);
+		Servico s3 = new Servico (3,"123456789","98745612399",5,500,10,9,"25-06-2021","Eletricista",true);
+		Servico s4 = new Servico (4,"123456788","98745612388",5,500,10,4,"20-06-2021","Mecanico",false);
+		Servico s5 = new Servico (5,"123456788","98745612388",5,500,10,6,"20-06-2021","Mecanico",true);
 		repositorioServicos.add(s1);
 		repositorioServicos.add(s2);
 		repositorioServicos.add(s3);
@@ -61,7 +61,6 @@ public class Main {
 		repositorioServicos.add(s5);
 		
 		Scanner leitor = new Scanner(System.in);
-		
 		Operador usuario = null;
 		String comando = "S";
 		

@@ -6,18 +6,27 @@ public class Operador {
 	private String senha;
 	private boolean permissaoAdmin;
 	
+	public Operador( String email, String nome, String senha) {
+		super();
+		this.nome = nome;
+		this.email = email;
+		this.senha = senha;
+		this.permissaoAdmin = false;
+	}
+	
+	public Operador( String email, String nome, String senha, boolean permissao) {
+		super();
+		this.nome = nome;
+		this.email = email;
+		this.senha = senha;
+		this.permissaoAdmin = permissao;
+	}
 	
 	public boolean getPermissaoAdmin() {
 		return permissaoAdmin;
 	}
 	public void setPermissaoAdmin(boolean permissaoAdmin) {
 		this.permissaoAdmin = permissaoAdmin;
-	}
-	public Operador(String nome, String email, String senha) {
-		super();
-		this.nome = nome;
-		this.email = email;
-		this.senha = senha;
 	}
 	public String getNome() {
 		return nome;

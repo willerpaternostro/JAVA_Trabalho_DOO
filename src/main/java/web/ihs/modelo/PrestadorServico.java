@@ -11,7 +11,7 @@ public class PrestadorServico {
 	private boolean atendeUrgencia;
 	
 	
-	public PrestadorServico(String nome,  String documento, String endereco, String telefone, String servicoOferecido,
+	public PrestadorServico(String nome,   String endereco,String documento, String telefone, String servicoOferecido,
 			float valorDiaria, boolean atendeUrgencia) {
 		super();
 		this.nome = nome;

@@ -7,8 +7,8 @@ import java.sql.SQLException;
 public class ConexaoFactory {
 	public static Connection getConexao() {
 		try {
-		Class.forName("org.hsqldb.jdbc.JDBCDriver");
-		return DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/ihomeservicedb","sa","");
+			Class.forName("org.hsqldb.jdbc.JDBCDriver");
+			return DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/ihomeservicesfinaldb","sa","");
 		} catch (ClassNotFoundException | SQLException e) {
 			throw new  RuntimeException(e);
 		}

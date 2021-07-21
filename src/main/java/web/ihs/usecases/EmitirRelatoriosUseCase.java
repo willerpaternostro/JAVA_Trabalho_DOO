@@ -23,8 +23,6 @@ public class EmitirRelatoriosUseCase {
 	public void profissionaisBemAvaliados(ArrayList<Servico> repositorioServicos, ArrayList<PrestadorServico> repositorioPrestadores) {
 		
 		System.out.println("*** Melhores Avaliações dos Profissionais ***");
-		double avaliacao = 0;
-		String documento = null;
 		ArrayList<String> profissionais = new ArrayList<String>();
 		
 		//Criando um vetor com todos os profissionais que realizaram servico
@@ -71,14 +69,11 @@ public class EmitirRelatoriosUseCase {
 			System.out.println("Avaliacao:"+maior);
 			prestador.informacoes();
 		}
-		
 	}
 	public void profissionaisMaisRequisitados(ArrayList<Servico> repositorioServicos, ArrayList<PrestadorServico> repositorioPrestadores) {
 		System.out.println("*** Profissional que mais realizou servicos ***");	
 		ArrayList<String> profissionais = new ArrayList<String>();
 		
-		String documento = null;
-	
 		for(Servico servico:repositorioServicos) {
 			if(!profissionais.contains(servico.getDocumentoPrestador()))
 				profissionais.add(servico.getDocumentoPrestador());
@@ -153,6 +148,7 @@ public class EmitirRelatoriosUseCase {
 	public void servicosRealizados(ArrayList<Servico> repositorioServicos) {
 		System.out.println("*** Servicos realizados neste periodo ***");
 	}
+	
 	public  String menuGerenciar(Scanner leitor, ArrayList<Cliente> clientes,ArrayList<PrestadorServico> prestadores,ArrayList<Servico> servicos) {
 		if(servicos.size() == 0) {
 			System.out.println("*** Nenhum relatorio gerado ***");

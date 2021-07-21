@@ -15,11 +15,11 @@ public class ControleServlet extends HttpServlet {
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String cmd = request.getParameter("comando");
-		String nomeClasse = "web.loja.comando." + cmd;
+		String nomeClasse = "web.ihs.comando." + cmd;
 		
-		try { //Feito esse bloco, não precisamos mais alterá-lo quando add novos comandos
+		try { 
 			Class<?> classe = Class.forName(nomeClasse); 
-			Comando comando = (Comando) classe.getConstructor().newInstance(); // instancia a classe do comando solicitado
+			Comando comando = (Comando) classe.getConstructor().newInstance(); 
 			String visao = comando.executar(request,response);
 			if(request.getMethod().equalsIgnoreCase("post")) { 
 				response.sendRedirect(visao);

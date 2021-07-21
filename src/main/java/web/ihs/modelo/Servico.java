@@ -3,21 +3,22 @@ package web.ihs.modelo;
 
 
 public class Servico {
-	private int id;
-	private Cliente cliente;
+	private int id; // sentimos falta de ter um identificador do serviço realizado, portanto, colocamos este atributo
 	private String cpfCliente;
-	private PrestadorServico prestador;
 	private String documentoPrestador;
-	private double tempoGasto;
-	private float valorFinal;
+	private double tempoGasto; //Poderia ser em dias(int), já que o valor é calculado em diária
+	private float valorFinal; // (Valor diaria * dias trabalhados)-porcentagemADM
 	private double porcentagemAdm;
 	private double avaliacao;
 	private String dataRealizacao;
 	private boolean status;
-	private String tipoServico;
+	
+	private String tipoServico; // Poderia ser um array
+	private Cliente cliente;
+	private PrestadorServico prestador;
 	
 	public Servico(String cpfCliente, String documentoPrestador, double tempoGasto, float valorFinal,
-			double porcentagemAdm, double avaliacao, String dataRealizacao, boolean status, String tipoServico) {
+			double porcentagemAdm, double avaliacao, String dataRealizacao,  String tipoServico,boolean status) {
 		super();
 
 		this.cpfCliente = cpfCliente;
@@ -32,7 +33,7 @@ public class Servico {
 	}
 	// Criei este segundo para ServicoDAO reconhecer quando for listar servicos
 	public Servico(int id, String cpfCliente, String documentoPrestador, double tempoGasto, float valorFinal,
-			double porcentagemAdm, double avaliacao, String dataRealizacao, boolean status, String tipoServico) {
+			double porcentagemAdm, double avaliacao, String dataRealizacao,  String tipoServico, boolean status) {
 		super();
 		this.id = id;
 		this.cpfCliente = cpfCliente;

@@ -38,12 +38,12 @@ public class GerenciarServicosUseCase {
 		String tipoServico = leitor.next();
 		System.out.println("Data realizacao:");
 		String dataRealizacao = leitor.next();
-		System.out.println("Status do servico (1) Concluido (2)Nao concluido:");
+		System.out.println("Status do servico (1) Concluido (0)Nao concluido:");
 		int escolha = leitor.nextInt();
 		boolean status = escolha == 1?true:false;
 		
 		Servico servico = new Servico( codigo,documentoCliente,  documentoPrestador,  tempoGasto,  valorFinal,
-				 porcentagemAdm,  avaliacao,  dataRealizacao,  status,  tipoServico);
+				 porcentagemAdm,  avaliacao,  dataRealizacao, tipoServico, status  );
 		repositorioServicos.add(servico);
 	}
 	
